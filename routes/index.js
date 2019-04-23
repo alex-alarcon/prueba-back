@@ -1,7 +1,9 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-router.get('/mi-servicio', function(req, res, next) {
+const validar = require('../utils/validator');
+
+router.get('/mi-servicio', (req, res, next) => {
   res.status(200);
   res.json(
     [
@@ -10,5 +12,15 @@ router.get('/mi-servicio', function(req, res, next) {
     ]
   );
 });
+
+router.post('/form', (req, res, next) => {
+  const errores = validar(req.body);
+  if (errores instanceof Error) {
+    return next(errores);
+  }
+  console.log(req.body);
+  res.status(200);
+  res.end();
+})
 
 module.exports = router;

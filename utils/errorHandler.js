@@ -28,7 +28,7 @@ const handle400 = error => {
   if (error.statusCode === 400) {
     const err = {
       status: 400,
-      message: 'Syntax Error!'
+      message: error.message || 'Syntax Error!'
     };
 
     return err;
